@@ -120,10 +120,13 @@ def run_profile(index, params:Parameters):
         jr_data = check_jr(params.abcvoting.n,params.abcvoting.m,params.abcvoting.k,ballots_truthful,committee_truthful,iteration_data.committee_final)
         return ElectionData(index,iteration_data,None,jr_data,ejrplus_data)
 
+def run_profile_wrapper(args):
+    return run_profile(*args)
+
 # run num_elections profiles for the given parameters, collect and return stats
 def run_profiles(params:Parameters):
     with Pool() as pool:
-        data_total = list(pool.starmap(run_profile,[(i, params) for i in range(params.num_elections)]))
+        data_total = list(pool.imap_unordered(run_profile_wrapper,[(i, params) for i in range(params.num_elections)]))
 
     # filter out None and check for empty result
     iteration_data_total = list(filter(lambda x: x != None, data_total))

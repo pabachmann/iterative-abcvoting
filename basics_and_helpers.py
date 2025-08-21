@@ -64,8 +64,9 @@ def score_thiele(score_vector,ballots,W):
 
 w_small = [1,0.1,0.01,0.001,0.0001,0.00001,0.000001,0.0000001,0.00000001]
 w_large = [1,0.99999999,0.9999999,0.999999,0.99999,0.9999,0.999,0.99,0.9]
+w_pav = [1,1/2,1/3,1/4,1/5,1/6,1/7,1/8,1/9]
 
-@lru_cache(maxsize=1000000)
+@lru_cache(maxsize=100000)
 def compute_thiele(m,k,ballots):
     committees = sorted(get_subsets_len_k(range(m),k),key=lambda x: tuple(iter(x)))
     W_small = max(committees,key=lambda W:score_thiele(w_small,ballots,W))
@@ -79,7 +80,7 @@ def compute_thiele(m,k,ballots):
 # optimisation: memoized
 # can only be used with hashable ballots (frozensets)
 # returns (hashable) sorted tuple of frozensets
-@lru_cache(maxsize=1000000)
+@lru_cache(maxsize=100000)
 def compute_committees_memoized(abc_rule,m,k,resolute,ballots):
     profile = Profile(num_cand=m)
     profile.add_voters(ballots)
@@ -96,7 +97,7 @@ def compute_committee(params:Parameters, ballots):
             return None, True
         return set(W),tied
     else:
-        committees = compute_committees_memoized(params.abcvoting.abc_rule,params.abcvoting.m,params.abcvoting.k,params.abcvoting.resolute,ballots_hashable)
+        committees = compute_committees_memoized(params.abcvoting.abc_rule,params.abcvoting.m,params.abcvoting.k,resolute,ballots_hashable)
         committee = set(committees[0])
         tied = len(committees) > 1
         return committee,tied

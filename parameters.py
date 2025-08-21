@@ -93,6 +93,10 @@ def set_params(num_elections,skip_empty_ballots,ordinal,culture,avg_ballot_size,
     #if abc_rule.startswith("seq") or abc_rule.startswith("equal-shares"):
     #    resolute = True
 
+    # set resolute to false in order to detect unique winning committees when skipping ties
+    if params.deviation.skip_ties:
+        resolute = False
+
     # create dataclass instances for parameters
     ballot_generation_params = BallotGenerationParams(skip_empty_ballots, ordinal, culture, avg_ballot_size, alpha, phi, manual_ballots, manual_preference, random_cutoff, cutoff_points)
     abc_voting_params = ABCVotingParams(abc_rule, n, m, k, resolute)

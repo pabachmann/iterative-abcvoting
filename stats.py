@@ -57,13 +57,15 @@ def get_iteration_stats(iteration_data_list: list[IterationData]):
     num_elections = len(iteration_data_list)
     num_converging = count_if(lambda x: x.converged,iteration_data_list)
     num_cycling = count_if(lambda x: x.cycled,iteration_data_list)
+    num_deviating = count_if(lambda x: len(x.all_deviations) > 0,iteration_data_list)
 
     # calculate stats for output
     percent_converging = num_converging / num_elections * 100
     percent_cycling = num_cycling / num_elections * 100
+    percent_deviating = num_deviating / num_elections * 100
     avg_num_deviations = sum_f(lambda x: len(x.all_deviations),iteration_data_list) / num_elections
     avg_num_manipulators = sum_f(lambda x: len(x.manipulators),iteration_data_list) / num_elections
-    return IterationStats(percent_converging,percent_cycling,avg_num_deviations,avg_num_manipulators,iteration_data_list)
+    return IterationStats(percent_converging,percent_cycling,percent_deviating,avg_num_deviations,avg_num_manipulators,iteration_data_list)
 
 
 # calculate average welfare per voter for given committee using AV utility

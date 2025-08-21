@@ -69,11 +69,6 @@ def psc_violation(n, m, k, preferences_truthful, W):
     # return coalition, cutoff and l-value of largest PSC violation
     return max_coalition, max_cutoff, max_l
 
-# PRINT FUNCTIONS
-# print ejr+ violation
-def print_ejr_plus_violation(add_str,c,l,set):
-    print("\033[93m" + add_str + "W: \tEJR+ violation for candidate " + str(c) + ": " + str(l) + "-deprived set of " + str(len(set)) + " voters: " + str(set) + "\033[0m")
-
 # check truthful and final committee for EJR+ violations
 def check_ejr_plus(n, m, k, ballots_truthful, W_truthful, W_final):
     candidate_t,unrep_set_t,l_t   = ejr_plus_violation_max(n,m,k,ballots_truthful,W_truthful)

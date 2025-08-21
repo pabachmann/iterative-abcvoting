@@ -103,6 +103,7 @@ class ElectionData:
 class IterationStats:
     percent_converging: float
     percent_cycling: float
+    percent_deviating: float
     avg_num_deviations: float
     avg_num_manipulators: float    
     all_iteration_data: list[IterationData]
