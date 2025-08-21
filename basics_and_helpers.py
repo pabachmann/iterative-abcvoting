@@ -97,7 +97,7 @@ def compute_committee(params:Parameters, ballots):
             return None, True
         return set(W),tied
     else:
-        committees = compute_committees_memoized(params.abcvoting.abc_rule,params.abcvoting.m,params.abcvoting.k,resolute,ballots_hashable)
+        committees = compute_committees_memoized(params.abcvoting.abc_rule,params.abcvoting.m,params.abcvoting.k,params.abcvoting.resolute,ballots_hashable)
         committee = set(committees[0])
         tied = len(committees) > 1
         return committee,tied

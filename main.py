@@ -61,7 +61,7 @@ trace               = False
 # run once for fixed (global) parameters
 def run_batch():
     # set file output path
-    filename = "/Users/Gast/Simulations MA/results/" + abc_rule.upper() + "/n" + str(n) + " m" + str(m) + " k" + str(k) + " x" + str(num_elections) + " " + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+    filename = "filepath/" + abc_rule.upper() + "/n" + str(n) + " m" + str(m) + " k" + str(k) + " x" + str(num_elections) + " " + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
     os.mkdir(filename)
     # set parameters and run elections
     parameters = set_params(num_elections,skip_empty_ballots,ordinal,culture,avg_ballot_size,alpha,phi,manual_ballots,manual_preference,random_cutoff,cutoff_points,abc_rule,n,m,k,resolute,max_iterations,cycle_iteration,deviation_type,swap_j,set_preference,skip_ties,trace,filename)

@@ -94,7 +94,7 @@ def set_params(num_elections,skip_empty_ballots,ordinal,culture,avg_ballot_size,
     #    resolute = True
 
     # set resolute to false in order to detect unique winning committees when skipping ties
-    if params.deviation.skip_ties:
+    if skip_ties:
         resolute = False
 
     # create dataclass instances for parameters
